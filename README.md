@@ -1,1 +1,12 @@
-# 2022-level1-mission-remind
+## 개요
+- level1에서 진행했던 미션을 다시 만들어보고 서로 리뷰하는 스터디입니다.
+
+## 스터디 일정
+- [페어매칭](https://github.com/woowacourse/java-pairmatching-precourse) (4/9 ~ 4/18)
+  - 1차 pr : 4월 13일 (수) 오후 6시까지
+  - 1차 pr 피드백 : 4월 14일 (목) 오후 2시까지
+  - ~4월18일 : 피드백 후 리뷰 요청
+
+## 스터디 규칙
+- 스터디원 전원 approve를 받고 merge할 수 있습니다.
+- 미션 코드 내의 테스트코드를 통과해야합니다.
