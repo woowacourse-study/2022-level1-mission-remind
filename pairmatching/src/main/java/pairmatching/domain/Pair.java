@@ -6,6 +6,9 @@ import java.util.Set;
 
 public class Pair {
 
+    private static final int MIN_PAIR_SIZE = 2;
+    private static final int MAX_PAIR_SIZE = 3;
+
     private final Set<Crew> crews;
 
     public Pair(final Set<Crew> crews) {
@@ -15,7 +18,7 @@ public class Pair {
     }
 
     private void validatePairSize(final Set<Crew> crews) {
-        if (crews.size() != 2 && crews.size() != 3) {
+        if (crews.size() < MIN_PAIR_SIZE || MAX_PAIR_SIZE < crews.size()) {
             throw new IllegalArgumentException("[ERROR] 페어는 2명 또는 3명만 가능");
         }
     }
