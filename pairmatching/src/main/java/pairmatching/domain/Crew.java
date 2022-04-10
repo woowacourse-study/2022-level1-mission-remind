@@ -20,4 +20,21 @@ public class Crew {
             throw new IllegalArgumentException("[ERROR] 이름 공백불가");
         }
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Crew crew = (Crew) o;
+        return Objects.equals(name, crew.name) && course == crew.course;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, course);
+    }
 }
