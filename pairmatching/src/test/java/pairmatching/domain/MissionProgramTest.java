@@ -12,16 +12,19 @@ class MissionProgramTest {
 
     @ParameterizedTest
     @NullSource
-    void 미션_이름이_null인_경우_예외발생(final Course course) {
-        assertThatThrownBy(() -> new MissionProgram(course, new ArrayList<>()))
+    void 크루들_정보가_null인_경우_예외발생(final CourseCrews crews) {
+        assertThatThrownBy(() -> new MissionProgram(crews, new ArrayList<>()))
                 .isInstanceOf(NullPointerException.class)
-                .hasMessage("[ERROR] course null불가");
+                .hasMessage("[ERROR] crews null불가");
     }
 
     @ParameterizedTest
     @NullSource
     void 미션_리스트가_null인_경우_예외발생(final List<Mission> missions) {
-        assertThatThrownBy(() -> new MissionProgram(BACKEND, missions))
+        CourseCrews crews = new CourseCrews(List.of(new Crew("crew1", BACKEND),
+                new Crew("crew2", BACKEND)));
+
+        assertThatThrownBy(() -> new MissionProgram(crews, missions))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessage("[ERROR] missions null불가");
     }

@@ -31,6 +31,6 @@ class MissionTest {
     void 레벨이_null인_경우_예외발생(final Level level) {
         assertThatThrownBy(() -> new Mission("mission", level, new ArrayList<>()))
                 .isInstanceOf(NullPointerException.class)
-                .hasMessage("[ERROR] 매칭 pair null 불가");
+                .hasMessage("[ERROR] level null 불가");
     }
 }
