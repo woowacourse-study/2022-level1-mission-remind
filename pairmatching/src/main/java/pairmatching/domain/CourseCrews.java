@@ -1,8 +1,10 @@
 package pairmatching.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CourseCrews {
 
@@ -38,5 +40,11 @@ public class CourseCrews {
                 .findAny()
                 .map(Crew::course)
                 .orElseThrow(() -> new IllegalStateException("[ERROR] 과정을 반환할 수 없음"));
+    }
+
+    public List<String> shuffledCrewNames() {
+        return Randoms.shuffle(crews.stream()
+                .map(Crew::name)
+                .collect(Collectors.toList()));
     }
 }

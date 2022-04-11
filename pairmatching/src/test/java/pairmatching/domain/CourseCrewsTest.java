@@ -35,4 +35,13 @@ class CourseCrewsTest {
 
         assertThat(crews.course()).isEqualTo(BACKEND);
     }
+
+    @Test
+    void 셔플된_크루의_이름을_반환() {
+        CourseCrews crews = new CourseCrews(List.of(new Crew("crew1", BACKEND),
+                new Crew("crew2", BACKEND),
+                new Crew("crew3", BACKEND)));
+
+        assertThat(crews.shuffledCrewNames()).hasSize(3);
+    }
 }
