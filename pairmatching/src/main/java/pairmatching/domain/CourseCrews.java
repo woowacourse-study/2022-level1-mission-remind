@@ -11,7 +11,14 @@ public class CourseCrews {
     public CourseCrews(final List<Crew> crews) {
         Objects.requireNonNull(crews, "[ERROR] crews null불가");
         this.crews = new ArrayList<>(crews);
+        validateEmptyCrews(this.crews);
         validateAnotherCourse(this.crews);
+    }
+
+    private void validateEmptyCrews(final List<Crew> crews) {
+        if (crews.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 빈 크루는 불가");
+        }
     }
 
     private void validateAnotherCourse(final List<Crew> crews) {

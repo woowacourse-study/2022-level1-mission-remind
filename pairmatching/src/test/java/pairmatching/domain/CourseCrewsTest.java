@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pairmatching.domain.Course.BACKEND;
 import static pairmatching.domain.Course.FRONTEND;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -17,5 +18,12 @@ class CourseCrewsTest {
         assertThatThrownBy(() -> new CourseCrews(crews))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 다른 과정의 크루가 존재");
+    }
+
+    @Test
+    void 크루가_비어있는_경우_예외발생() {
+        assertThatThrownBy(() -> new CourseCrews(new ArrayList<>()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 빈 크루는 불가");
     }
 }
