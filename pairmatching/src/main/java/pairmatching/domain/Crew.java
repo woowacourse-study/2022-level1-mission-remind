@@ -25,6 +25,14 @@ public class Crew {
         return this.course != crew.course;
     }
 
+    public String name() {
+        return name;
+    }
+
+    public Course course() {
+        return course;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

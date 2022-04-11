@@ -32,4 +32,11 @@ public class CourseCrews {
         return crews.stream()
                 .anyMatch(firstCrew::isAnotherCrew);
     }
+
+    public Course course() {
+        return crews.stream()
+                .findAny()
+                .map(Crew::course)
+                .orElseThrow(() -> new IllegalStateException("[ERROR] 과정을 반환할 수 없음"));
+    }
 }
