@@ -21,6 +21,10 @@ public class Crew {
         }
     }
 
+    public boolean isAnotherCrew(final Crew crew) {
+        return this.course != crew.course;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
