@@ -30,6 +30,6 @@ public class CourseCrews {
     private boolean containAnotherCourse(final List<Crew> crews) {
         final Crew firstCrew = crews.get(0);
         return crews.stream()
-                .anyMatch(crew -> crew.isAnotherCrew(firstCrew));
+                .anyMatch(firstCrew::isAnotherCrew);
     }
 }
