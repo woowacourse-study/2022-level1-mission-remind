@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Mission {
@@ -32,5 +33,27 @@ public class Mission {
 
     public boolean isSameMission(final String name, final Level level) {
         return this.name.equals(name) && this.level == level;
+    }
+
+    public List<Pair> matchPair(final Pairs pairs) {
+        return this.pairs.replaceAllPairs(pairs);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Mission mission = (Mission) o;
+        return Objects.equals(name, mission.name) && level == mission.level && Objects
+                .equals(pairs, mission.pairs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, level, pairs);
     }
 }

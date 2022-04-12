@@ -1,10 +1,13 @@
 package pairmatching.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pairmatching.domain.Course.BACKEND;
+import static pairmatching.domain.Level.LEVEL1;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import pairmatching.strategy.CrewRandomsShuffleStrategy;
@@ -35,33 +38,48 @@ class MissionProgramTest {
                 .hasMessage("[ERROR] missions null불가");
     }
 
-//    @Test
-//    void 존재하지_않는_미션_매칭_예외발생() {
-//        final CourseCrews crews = new CourseCrews(
-//                List.of(crew1, crew2, crew3, crew4),
-//                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
-//        final List<Mission> missions = List.of(
-//                new Mission("mission1", LEVEL1, List.of(new Pair(crew1, crew2), new Pair(crew3, crew4))),
-//                new Mission("mission2", LEVEL1, new ArrayList<>()));
-//        final MissionProgram missionProgram = new MissionProgram(crews, missions);
-//
-//        assertThatThrownBy(() -> missionProgram.matchPair("mission3", LEVEL1))
-//                .isInstanceOf(IllegalStateException.class)
-//                .hasMessage("[ERROR] 존재하지 않는 미션");
-//    }
-//
-//    @Test
-//    void 매칭_시도횟수가_3회가_넘는_경우_예외발생() {
-//        final CourseCrews crews = new CourseCrews(
-//                List.of(crew1, crew2, crew3, crew4),
-//                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
-//        final List<Mission> missions = List.of(
-//                new Mission("mission1", LEVEL1, List.of(new Pair(crew1, crew2), new Pair(crew3, crew4))),
-//                new Mission("mission2", LEVEL1, new ArrayList<>()));
-//        final MissionProgram missionProgram = new MissionProgram(crews, missions);
-//
-//        assertThatThrownBy(() -> missionProgram.matchPair("mission2", LEVEL1))
-//                .isInstanceOf(IllegalStateException.class)
-//                .hasMessage("[ERROR] 3회 매칭 실패");
-//    }
+    @Test
+    void 존재하지_않는_미션_매칭_예외발생() {
+        final CourseCrews crews = new CourseCrews(
+                List.of(crew1, crew2, crew3, crew4),
+                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
+        final List<Mission> missions = List.of(
+                new Mission("mission1", LEVEL1, new Pairs(List.of(new Pair(crew1, crew2), new Pair(crew3, crew4)))),
+                new Mission("mission2", LEVEL1, new Pairs(new ArrayList<>())));
+        final MissionProgram missionProgram = new MissionProgram(crews, missions);
+
+        assertThatThrownBy(() -> missionProgram.matchPair("mission3", LEVEL1))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("[ERROR] 존재하지 않는 미션");
+    }
+
+    @Test
+    void 매칭_시도횟수가_3회가_넘는_경우_예외발생() {
+        final CourseCrews crews = new CourseCrews(
+                List.of(crew1, crew2, crew3, crew4),
+                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
+        final List<Mission> missions = List.of(
+                new Mission("mission1", LEVEL1, new Pairs(List.of(new Pair(crew1, crew2), new Pair(crew3, crew4)))),
+                new Mission("mission2", LEVEL1, new Pairs(new ArrayList<>())));
+        final MissionProgram missionProgram = new MissionProgram(crews, missions);
+
+        assertThatThrownBy(() -> missionProgram.matchPair("mission2", LEVEL1))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("[ERROR] 3회 매칭 실패");
+    }
+
+    @Test
+    void 새로운_페어매칭_성공() {
+        final CourseCrews crews = new CourseCrews(
+                List.of(crew1, crew2, crew3, crew4),
+                crew -> List.of("crew1", "crew3", "crew4", "crew2"));
+        final List<Mission> missions = List.of(
+                new Mission("mission1", LEVEL1, new Pairs(List.of(new Pair(crew1, crew2), new Pair(crew3, crew4)))),
+                new Mission("mission2", LEVEL1, new Pairs(new ArrayList<>())));
+        final MissionProgram missionProgram = new MissionProgram(crews, missions);
+
+        final List<Pair> expected = List.of(new Pair(crew1, crew3), new Pair(crew2, crew4));
+
+        assertThat(missionProgram.matchPair("mission2", LEVEL1)).isEqualTo(expected);
+    }
 }

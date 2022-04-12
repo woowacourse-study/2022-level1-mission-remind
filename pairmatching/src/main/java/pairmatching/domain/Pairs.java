@@ -53,6 +53,12 @@ public class Pairs {
                 .anyMatch(pair::isSamePair);
     }
 
+    public List<Pair> replaceAllPairs(Pairs pairs) {
+        this.pairs.clear();
+        this.pairs.addAll(pairs.pairs);
+        return List.copyOf(this.pairs);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
