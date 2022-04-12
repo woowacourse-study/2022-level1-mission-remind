@@ -1,5 +1,6 @@
 package pairmatching.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pairmatching.domain.Course.BACKEND;
 
@@ -35,6 +36,24 @@ class PairTest {
                         new Crew("crew2", BACKEND),
                         new Crew("crew3", BACKEND),
                         new Crew("crew4", BACKEND)))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("createCompareSamePair")
+    void 같은_페어정보인지_확인(final Pair comparePair, final boolean expected) {
+        final Pair pair = new Pair(Set.of(new Crew("crew1", BACKEND),
+                new Crew("crew2", BACKEND)));
+
+        assertThat(pair.isSamePair(comparePair)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> createCompareSamePair() {
+        return Stream.of(
+                Arguments.of(new Pair(Set.of(new Crew("crew2", BACKEND),
+                        new Crew("crew1", BACKEND))), true),
+                Arguments.of(new Pair(Set.of(new Crew("crew3", BACKEND),
+                        new Crew("crew1", BACKEND))), false)
         );
     }
 }
