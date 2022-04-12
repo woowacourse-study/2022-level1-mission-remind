@@ -27,10 +27,17 @@ public class Mission {
         if (!isSameLevel(mission)) {
             return false;
         }
-        return true;
+        return mission.pairs
+                .stream()
+                .anyMatch(this::containPairCrew);
     }
 
     private boolean isSameLevel(final Mission mission) {
         return this.level == mission.level;
+    }
+
+    private boolean containPairCrew(final Pair comparePair) {
+        return pairs.stream()
+                .anyMatch(comparePair::isSamePair);
     }
 }
