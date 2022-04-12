@@ -56,4 +56,8 @@ public class MissionProgram {
                 .filter(mission -> !currentMission.equals(mission))
                 .noneMatch(mission -> mission.containAlreadyPairCrew(pairs));
     }
+
+    public boolean isSameCourse(final Course course) {
+        return crews.course() == course;
+    }
 }
