@@ -35,4 +35,16 @@ public class RandomMissionPrograms {
                 .map(name -> new Crew(name, course))
                 .collect(Collectors.toList());
     }
+
+    public List<Pair> matchPair(final Course course, final Level level, final String missionName) {
+        final MissionProgram missionProgram = findMissionByCourse(course);
+        return missionProgram.matchPair(missionName, level);
+    }
+
+    private MissionProgram findMissionByCourse(final Course course) {
+        return missionPrograms.stream()
+                .filter(missionProgram -> missionProgram.isSameCourse(course))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("[ERROR] 존재하지 않는 과정"));
+    }
 }
