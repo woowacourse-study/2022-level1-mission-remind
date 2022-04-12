@@ -22,4 +22,8 @@ public class Mission {
     public Mission(final String name, final Level level) {
         this(name, level, new ArrayList<>());
     }
+
+    public boolean isSameLevel(final Mission mission) {
+        return this.level == mission.level;
+    }
 }

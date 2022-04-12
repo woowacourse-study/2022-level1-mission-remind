@@ -1,11 +1,13 @@
 package pairmatching.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pairmatching.domain.Level.LEVEL1;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 
 class MissionTest {
@@ -32,5 +34,14 @@ class MissionTest {
         assertThatThrownBy(() -> new Mission("mission", level, new ArrayList<>()))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessage("[ERROR] level null 불가");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"LEVEL1,true", "LEVEL2,false"})
+    void 같은_레벨인지_확인(final Level level, final boolean expected) {
+        final Mission mission = new Mission("mission1", LEVEL1);
+        final Mission compareMission = new Mission("mission2", level);
+
+        assertThat(mission.isSameLevel(compareMission)).isEqualTo(expected);
     }
 }
