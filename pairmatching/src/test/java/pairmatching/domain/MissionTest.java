@@ -49,11 +49,21 @@ class MissionTest {
 
     @Test
     void 이미_페어매칭_이력이_있는_경우_false() {
-        final Set<Crew> pairs = Set.of(new Crew("crew1", BACKEND),
-                new Crew("crew2", BACKEND));
+        final Set<Crew> pairs = Set.of(new Crew("crew1", BACKEND), new Crew("crew2", BACKEND));
         final Mission mission = new Mission("mission1", LEVEL1, List.of(new Pair(pairs)));
-        final Mission compareMission = new Mission("mission2", LEVEL2, List.of(new Pair(pairs)));
+        final Mission compareMission = new Mission("mission2", LEVEL1, List.of(new Pair(pairs)));
 
         assertThat(mission.containAlreadyPairCrew(compareMission)).isFalse();
+    }
+
+    @Test
+    void 페어매칭_이력이_없는_경우_true() {
+        final Set<Crew> pairs = Set.of(new Crew("crew1", BACKEND), new Crew("crew2", BACKEND));
+        final Mission mission = new Mission("mission1", LEVEL1, List.of(new Pair(pairs)));
+
+        final Set<Crew> comparePairs = Set.of(new Crew("crew3", BACKEND), new Crew("crew2", BACKEND));
+        final Mission compareMission = new Mission("mission2", LEVEL1, List.of(new Pair(comparePairs)));
+
+        assertThat(mission.containAlreadyPairCrew(compareMission)).isTrue();
     }
 }

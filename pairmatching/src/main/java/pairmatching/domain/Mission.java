@@ -29,7 +29,7 @@ public class Mission {
         }
         return mission.pairs
                 .stream()
-                .anyMatch(this::containPairCrew);
+                .noneMatch(this::containPairCrew);
     }
 
     private boolean isSameLevel(final Mission mission) {
