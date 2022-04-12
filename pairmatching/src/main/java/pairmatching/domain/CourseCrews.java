@@ -1,18 +1,20 @@
 package pairmatching.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import pairmatching.strategy.CrewShuffleStrategy;
 
 public class CourseCrews {
 
     private final List<Crew> crews;
+    private final CrewShuffleStrategy crewShuffleStrategy;
 
-    public CourseCrews(final List<Crew> crews) {
+    public CourseCrews(final List<Crew> crews, final CrewShuffleStrategy crewShuffleStrategy) {
         Objects.requireNonNull(crews, "[ERROR] crews null불가");
+        Objects.requireNonNull(crewShuffleStrategy, "[ERROR] 크루 셔플 전략 null불가");
         this.crews = new ArrayList<>(crews);
+        this.crewShuffleStrategy = crewShuffleStrategy;
         validateEmptyCrews(this.crews);
         validateAnotherCourse(this.crews);
     }
@@ -43,8 +45,6 @@ public class CourseCrews {
     }
 
     public List<String> shuffledCrewNames() {
-        return Randoms.shuffle(crews.stream()
-                .map(Crew::name)
-                .collect(Collectors.toList()));
+        return crewShuffleStrategy.shuffledCrewNames(crews);
     }
 }

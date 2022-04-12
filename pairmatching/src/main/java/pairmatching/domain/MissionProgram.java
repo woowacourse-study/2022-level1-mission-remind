@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import pairmatching.strategy.CrewRandomsShuffleStrategy;
 
 public class MissionProgram {
 
@@ -19,7 +20,7 @@ public class MissionProgram {
     }
 
     public MissionProgram(final List<Crew> crews, final Map<String, Level> missionMap) {
-        this(new CourseCrews(crews), convertMissions(missionMap));
+        this(new CourseCrews(crews, new CrewRandomsShuffleStrategy()), convertMissions(missionMap));
     }
 
     private static List<Mission> convertMissions(final Map<String, Level> missions) {
