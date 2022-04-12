@@ -18,4 +18,8 @@ public class Mission {
         this.level = level;
         this.pairs = new ArrayList<>(pairs);
     }
+
+    public Mission(final String name, final Level level) {
+        this(name, level, new ArrayList<>());
+    }
 }

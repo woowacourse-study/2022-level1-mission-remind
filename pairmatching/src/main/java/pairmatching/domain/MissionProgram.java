@@ -2,7 +2,9 @@ package pairmatching.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class MissionProgram {
 
@@ -14,5 +16,16 @@ public class MissionProgram {
         Objects.requireNonNull(missions, "[ERROR] missions null불가");
         this.crews = crews;
         this.missions = new ArrayList<>(missions);
+    }
+
+    public MissionProgram(final List<Crew> crews, final Map<String, Level> missionMap) {
+        this(new CourseCrews(crews), convertMissions(missionMap));
+    }
+
+    private static List<Mission> convertMissions(final Map<String, Level> missions) {
+        return missions.entrySet()
+                .stream()
+                .map(entry -> new Mission(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 }
