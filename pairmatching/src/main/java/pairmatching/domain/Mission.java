@@ -1,43 +1,36 @@
 package pairmatching.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Mission {
 
     private final String name;
     private final Level level;
-    private final List<Pair> pairs;
+    private final Pairs pairs;
 
-    public Mission(final String name, final Level level, final List<Pair> pairs) {
+    public Mission(final String name, final Level level, final Pairs pairs) {
         Objects.requireNonNull(name, "[ERROR] 미션 이름 null불가");
         Objects.requireNonNull(level, "[ERROR] level null 불가");
         Objects.requireNonNull(pairs, "[ERROR] 매칭 pair null 불가");
         this.name = name;
         this.level = level;
-        this.pairs = new ArrayList<>(pairs);
+        this.pairs = pairs;
     }
 
     public Mission(final String name, final Level level) {
-        this(name, level, new ArrayList<>());
+        this(name, level, new Pairs(new ArrayList<>()));
     }
 
-    public boolean containAlreadyPairCrew(final Mission mission) {
-        if (!isSameLevel(mission)) {
-            return false;
-        }
-        return mission.pairs
-                .stream()
-                .noneMatch(this::containPairCrew);
+    public boolean containAlreadyPairCrew(final Pairs pairs) {
+        return this.pairs.containAlreadyPair(pairs);
     }
 
-    private boolean isSameLevel(final Mission mission) {
+    public boolean isSameLevel(final Mission mission) {
         return this.level == mission.level;
     }
 
-    private boolean containPairCrew(final Pair comparePair) {
-        return pairs.stream()
-                .anyMatch(comparePair::isSamePair);
+    public boolean isSameMission(final String name, final Level level) {
+        return this.name.equals(name) && this.level == level;
     }
 }

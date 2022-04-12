@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import pairmatching.strategy.CrewRandomsShuffleStrategy;
+import pairmatching.strategy.CrewShuffleStrategy;
 
 public class MissionProgram {
 
@@ -19,8 +19,9 @@ public class MissionProgram {
         this.missions = new ArrayList<>(missions);
     }
 
-    public MissionProgram(final List<Crew> crews, final Map<String, Level> missionMap) {
-        this(new CourseCrews(crews, new CrewRandomsShuffleStrategy()), convertMissions(missionMap));
+    public MissionProgram(final List<Crew> crews, final CrewShuffleStrategy strategy,
+                          final Map<String, Level> missionMap) {
+        this(new CourseCrews(crews, strategy), convertMissions(missionMap));
     }
 
     private static List<Mission> convertMissions(final Map<String, Level> missions) {
@@ -28,5 +29,20 @@ public class MissionProgram {
                 .stream()
                 .map(entry -> new Mission(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
+    }
+
+    public List<Pair> matchPair(final String missionName, final Level level) {
+        final Mission mission = findMission(missionName, level);
+//        IntStream.range(0, 3)
+//                .mapToObj(index -> crews.shuffledCrewNames())
+//                .
+        return null;
+    }
+
+    private Mission findMission(final String missionName, final Level level) {
+        return missions.stream()
+                .filter(mission -> mission.isSameMission(missionName, level))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("[ERROR] 존재하지 않는 미션"));
     }
 }

@@ -42,4 +42,24 @@ class PairsTest {
 
         assertThat(Pairs.createPairs(names, BACKEND)).isEqualTo(expected);
     }
+
+    @Test
+    void 이미_페어매칭_이력이_있는_경우_true() {
+        final Pairs pairs = new Pairs(List.of(new Pair(BACKEND, "name1", "name2"),
+                new Pair(BACKEND, "name4", "name5")));
+        final Pairs comparePairs = new Pairs(List.of(new Pair(BACKEND, "name1", "name2"),
+                new Pair(BACKEND, "name4", "name3")));
+
+        assertThat(pairs.containAlreadyPair(comparePairs)).isTrue();
+    }
+
+    @Test
+    void 페어매칭_이력이_없는_경우_false() {
+        final Pairs pairs = new Pairs(List.of(new Pair(BACKEND, "name1", "name2"),
+                new Pair(BACKEND, "name3", "name4")));
+        final Pairs comparePairs = new Pairs(List.of(new Pair(BACKEND, "name1", "name4"),
+                new Pair(BACKEND, "name2", "name3")));
+
+        assertThat(pairs.containAlreadyPair(comparePairs)).isFalse();
+    }
 }

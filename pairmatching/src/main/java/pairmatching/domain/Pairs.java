@@ -42,6 +42,17 @@ public class Pairs {
         return pairs;
     }
 
+    public boolean containAlreadyPair(final Pairs pairs) {
+        return this.pairs
+                .stream()
+                .anyMatch(pairs::containPair);
+    }
+
+    private boolean containPair(final Pair pair) {
+        return pairs.stream()
+                .anyMatch(pair::isSamePair);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

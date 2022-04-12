@@ -11,6 +11,11 @@ import pairmatching.strategy.CrewRandomsShuffleStrategy;
 
 class MissionProgramTest {
 
+    private final Crew crew1 = new Crew("crew1", BACKEND);
+    private final Crew crew2 = new Crew("crew2", BACKEND);
+    private final Crew crew3 = new Crew("crew3", BACKEND);
+    private final Crew crew4 = new Crew("crew4", BACKEND);
+
     @ParameterizedTest
     @NullSource
     void 크루들_정보가_null인_경우_예외발생(final CourseCrews crews) {
@@ -29,4 +34,34 @@ class MissionProgramTest {
                 .isInstanceOf(NullPointerException.class)
                 .hasMessage("[ERROR] missions null불가");
     }
+
+//    @Test
+//    void 존재하지_않는_미션_매칭_예외발생() {
+//        final CourseCrews crews = new CourseCrews(
+//                List.of(crew1, crew2, crew3, crew4),
+//                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
+//        final List<Mission> missions = List.of(
+//                new Mission("mission1", LEVEL1, List.of(new Pair(crew1, crew2), new Pair(crew3, crew4))),
+//                new Mission("mission2", LEVEL1, new ArrayList<>()));
+//        final MissionProgram missionProgram = new MissionProgram(crews, missions);
+//
+//        assertThatThrownBy(() -> missionProgram.matchPair("mission3", LEVEL1))
+//                .isInstanceOf(IllegalStateException.class)
+//                .hasMessage("[ERROR] 존재하지 않는 미션");
+//    }
+//
+//    @Test
+//    void 매칭_시도횟수가_3회가_넘는_경우_예외발생() {
+//        final CourseCrews crews = new CourseCrews(
+//                List.of(crew1, crew2, crew3, crew4),
+//                crew -> List.of("crew1", "crew2", "crew3", "crew4"));
+//        final List<Mission> missions = List.of(
+//                new Mission("mission1", LEVEL1, List.of(new Pair(crew1, crew2), new Pair(crew3, crew4))),
+//                new Mission("mission2", LEVEL1, new ArrayList<>()));
+//        final MissionProgram missionProgram = new MissionProgram(crews, missions);
+//
+//        assertThatThrownBy(() -> missionProgram.matchPair("mission2", LEVEL1))
+//                .isInstanceOf(IllegalStateException.class)
+//                .hasMessage("[ERROR] 3회 매칭 실패");
+//    }
 }
