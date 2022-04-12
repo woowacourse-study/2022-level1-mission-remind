@@ -81,4 +81,13 @@ class PairsTest {
 
         assertThat(pairs).isEqualTo(new Pairs(new ArrayList<>()));
     }
+
+    @Test
+    void 매칭된_페어가_없는데_현재_페어를_받으려는_경우_예외발생() {
+        final Pairs pairs = new Pairs(new ArrayList<>());
+
+        assertThatThrownBy(() -> pairs.currentMatchedPairs())
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("[ERROR] 매칭된 이력이 없어 현재 페어 반환 불가");
+    }
 }

@@ -66,6 +66,13 @@ public class Pairs {
         this.pairs.clear();
     }
 
+    public List<Pair> currentMatchedPairs() {
+        if (pairs.isEmpty()) {
+            throw new IllegalStateException("[ERROR] 매칭된 이력이 없어 현재 페어 반환 불가");
+        }
+        return List.copyOf(pairs);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
