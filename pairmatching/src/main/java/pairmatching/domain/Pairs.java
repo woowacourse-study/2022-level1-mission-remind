@@ -59,6 +59,13 @@ public class Pairs {
         return List.copyOf(this.pairs);
     }
 
+    public void resetPair() {
+        if (pairs.isEmpty()) {
+            throw new IllegalStateException("[ERROR] 매칭된 이력이 없어 초기화 불가");
+        }
+        this.pairs.clear();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
