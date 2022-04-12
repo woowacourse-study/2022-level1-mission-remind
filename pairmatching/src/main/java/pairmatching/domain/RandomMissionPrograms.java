@@ -37,14 +37,24 @@ public class RandomMissionPrograms {
     }
 
     public List<Pair> matchPair(final Course course, final Level level, final String missionName) {
-        final MissionProgram missionProgram = findMissionByCourse(course);
+        final MissionProgram missionProgram = findMissionProgramByCourse(course);
         return missionProgram.matchPair(missionName, level);
     }
 
-    private MissionProgram findMissionByCourse(final Course course) {
+    private MissionProgram findMissionProgramByCourse(final Course course) {
         return missionPrograms.stream()
                 .filter(missionProgram -> missionProgram.isSameCourse(course))
                 .findAny()
                 .orElseThrow(() -> new IllegalStateException("[ERROR] 존재하지 않는 과정"));
+    }
+
+    public void resetPair(final Course course, final Level level, final String missionName) {
+        final MissionProgram missionProgram = findMissionProgramByCourse(course);
+        missionProgram.resetPair(missionName, level);
+    }
+
+    public List<Pair> currentMatchedPairs(final Course course, final Level level, final String missionName) {
+        final MissionProgram missionProgram = findMissionProgramByCourse(course);
+        return missionProgram.currentMatchedPairs(missionName, level);
     }
 }

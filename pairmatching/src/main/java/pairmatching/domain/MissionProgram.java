@@ -60,4 +60,14 @@ public class MissionProgram {
     public boolean isSameCourse(final Course course) {
         return crews.course() == course;
     }
+
+    public void resetPair(final String missionName, final Level level) {
+        final Mission mission = findMission(missionName, level);
+        mission.resetPair();
+    }
+
+    public List<Pair> currentMatchedPairs(final String missionName, final Level level) {
+        final Mission mission = findMission(missionName, level);
+        return mission.currentMatchedPairs();
+    }
 }

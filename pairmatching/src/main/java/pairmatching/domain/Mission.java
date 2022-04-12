@@ -39,6 +39,14 @@ public class Mission {
         return this.pairs.replaceAllPairs(pairs);
     }
 
+    public void resetPair() {
+        pairs.resetPair();
+    }
+
+    public List<Pair> currentMatchedPairs() {
+        return pairs.currentMatchedPairs();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
