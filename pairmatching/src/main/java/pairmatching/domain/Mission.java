@@ -23,7 +23,14 @@ public class Mission {
         this(name, level, new ArrayList<>());
     }
 
-    public boolean isSameLevel(final Mission mission) {
+    public boolean containAlreadyPairCrew(final Mission mission) {
+        if (!isSameLevel(mission)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isSameLevel(final Mission mission) {
         return this.level == mission.level;
     }
 }
