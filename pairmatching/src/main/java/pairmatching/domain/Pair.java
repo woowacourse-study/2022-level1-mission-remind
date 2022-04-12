@@ -23,6 +23,22 @@ public class Pair {
         }
     }
 
+    public Pair(final Crew firstCrew, final Crew secondCrew) {
+        this(Set.of(firstCrew, secondCrew));
+    }
+
+    public Pair(final Course course, final String firstName, final String secondName) {
+        this(new Crew(firstName, course), new Crew(secondName, course));
+    }
+
+    public Pair(final Crew firstCrew, final Crew secondCrew, final Crew thirdCrew) {
+        this(Set.of(firstCrew, secondCrew, thirdCrew));
+    }
+
+    public Pair(final Course course, final String firstName, final String secondName, final String thirdName) {
+        this(new Crew(firstName, course), new Crew(secondName, course), new Crew(thirdName, course));
+    }
+
     public boolean isSamePair(final Pair pair) {
         if (!isSameSize(pair)) {
             return false;
