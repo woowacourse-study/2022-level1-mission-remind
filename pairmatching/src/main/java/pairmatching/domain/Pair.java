@@ -41,10 +41,7 @@ public class Pair {
     }
 
     public boolean isSamePair(final Pair pair) {
-        if (!isSameSize(pair)) {
-            return false;
-        }
-        return this.crews.equals(pair.crews);
+        return isSameSize(pair) && this.crews.equals(pair.crews);
     }
 
     private boolean isSameSize(final Pair pair) {
