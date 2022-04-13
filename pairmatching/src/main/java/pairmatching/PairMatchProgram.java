@@ -40,7 +40,7 @@ public class PairMatchProgram {
         crewNames.put(Course.BACKEND, InputView.inputBackendCrews());
         crewNames.put(Course.FRONTEND, InputView.inputFrontendCrews());
 
-        final RandomMissionPrograms randomMissionPrograms =  new RandomMissionPrograms(missions, crewNames);
+        final RandomMissionPrograms randomMissionPrograms = new RandomMissionPrograms(missions, crewNames);
         return new PairMatchProgram(randomMissionPrograms);
     }
 
@@ -81,15 +81,11 @@ public class PairMatchProgram {
             if (!randomMissionPrograms.isMatched(course, level, missionName)) {
                 return randomMissionPrograms.matchPair(course, level, missionName);
             }
-            else {
-                MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
-                if (matchCommand == YES) {
-                    return randomMissionPrograms.matchPair(course, level, missionName);
-                }
-                else {
-                    return runMatchCommand();
-                }
+            MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
+            if (matchCommand == YES) {
+                return randomMissionPrograms.matchPair(course, level, missionName);
             }
+            return runMatchCommand();
         } catch (IllegalArgumentException | IllegalStateException e) {
             ErrorView.printError(e);
             return runMatchCommand();
