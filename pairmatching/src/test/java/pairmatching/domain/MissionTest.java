@@ -6,6 +6,7 @@ import static pairmatching.domain.Level.LEVEL1;
 import java.util.ArrayList;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
+import pairmatching.domain.pair.Pairs;
 
 class MissionTest {
 

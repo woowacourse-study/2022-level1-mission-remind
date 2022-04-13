@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import pairmatching.domain.crew.Crew;
+import pairmatching.domain.crew.Crews;
+import pairmatching.domain.pair.Pair;
+import pairmatching.domain.pair.Pairs;
 import pairmatching.strategy.CrewShuffleStrategy;
 
 public class CourseMissions {

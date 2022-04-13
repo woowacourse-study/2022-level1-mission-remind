@@ -1,9 +1,11 @@
-package pairmatching.domain;
+package pairmatching.domain.pair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import pairmatching.domain.Course;
+import pairmatching.domain.crew.Crew;
 
 public class Pair {
 

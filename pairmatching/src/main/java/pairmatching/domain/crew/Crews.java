@@ -1,8 +1,9 @@
-package pairmatching.domain;
+package pairmatching.domain.crew;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import pairmatching.domain.Course;
 import pairmatching.strategy.CrewShuffleStrategy;
 
 public class Crews {

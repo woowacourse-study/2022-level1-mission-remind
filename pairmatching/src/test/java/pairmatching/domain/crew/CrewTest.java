@@ -1,4 +1,4 @@
-package pairmatching.domain;
+package pairmatching.domain.crew;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pairmatching.domain.Course.BACKEND;
@@ -6,6 +6,7 @@ import static pairmatching.domain.Course.BACKEND;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
+import pairmatching.domain.Course;
 
 class CrewTest {
 

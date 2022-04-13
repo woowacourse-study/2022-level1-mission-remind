@@ -1,7 +1,7 @@
 package pairmatching.strategy;
 
 import java.util.List;
-import pairmatching.domain.Crew;
+import pairmatching.domain.crew.Crew;
 
 public interface CrewShuffleStrategy {
 

@@ -10,6 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
+import pairmatching.domain.crew.Crew;
+import pairmatching.domain.crew.Crews;
+import pairmatching.domain.pair.Pair;
+import pairmatching.domain.pair.Pairs;
 import pairmatching.strategy.CrewRandomsShuffleStrategy;
 
 class CourseMissionsTest {

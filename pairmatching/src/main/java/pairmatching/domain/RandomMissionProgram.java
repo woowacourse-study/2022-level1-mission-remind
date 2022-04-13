@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import pairmatching.domain.crew.Crew;
+import pairmatching.domain.pair.Pair;
 import pairmatching.strategy.CrewRandomsShuffleStrategy;
 
 public class RandomMissionProgram {

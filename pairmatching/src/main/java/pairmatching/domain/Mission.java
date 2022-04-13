@@ -3,6 +3,8 @@ package pairmatching.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import pairmatching.domain.pair.Pair;
+import pairmatching.domain.pair.Pairs;
 
 public class Mission {
 

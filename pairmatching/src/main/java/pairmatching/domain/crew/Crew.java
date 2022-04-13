@@ -1,6 +1,7 @@
-package pairmatching.domain;
+package pairmatching.domain.crew;
 
 import java.util.Objects;
+import pairmatching.domain.Course;
 
 public class Crew {
 

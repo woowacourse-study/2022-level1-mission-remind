@@ -1,7 +1,7 @@
 package pairmatching.view;
 
 import java.util.List;
-import pairmatching.domain.Pair;
+import pairmatching.domain.pair.Pair;
 
 public class OutputView {
 
