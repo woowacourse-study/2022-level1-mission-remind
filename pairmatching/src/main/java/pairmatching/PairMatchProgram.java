@@ -10,7 +10,6 @@ import java.util.Map;
 import pairmatching.command.ProgramCommand;
 import pairmatching.domain.Course;
 import pairmatching.domain.Level;
-import pairmatching.domain.Pair;
 import pairmatching.domain.RandomMissionPrograms;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -50,21 +49,19 @@ public class PairMatchProgram {
             randomMissionPrograms.resetAllPair();
         }
         if (command == ProgramCommand.MATCH) {
-            List<String> missionValues = InputView.inputMission();
-            Course course = Course.from(missionValues.get(0));
-            Level level = Level.from(missionValues.get(1));
-            String missionName = missionValues.get(2);
-            List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
-            OutputView.printCurrentMatchedPairs(pairs);
+            programRunner(randomMissionPrograms::matchPair);
         }
         if (command == ProgramCommand.SEARCH) {
-            List<String> missionValues = InputView.inputMission();
-            Course course = Course.from(missionValues.get(0));
-            Level level = Level.from(missionValues.get(1));
-            String missionName = missionValues.get(2);
-            List<Pair> pairs = randomMissionPrograms.currentMatchedPairs(course, level, missionName);
-            OutputView.printCurrentMatchedPairs(pairs);
+            programRunner(randomMissionPrograms::currentMatchedPairs);
         }
         run();
+    }
+
+    private void programRunner(PairMatchProgramRunner runner) {
+        List<String> missionValues = InputView.inputMission();
+        Course course = Course.from(missionValues.get(0));
+        Level level = Level.from(missionValues.get(1));
+        String missionName = missionValues.get(2);
+        OutputView.printCurrentMatchedPairs(runner.apply(course, level, missionName));
     }
 }
