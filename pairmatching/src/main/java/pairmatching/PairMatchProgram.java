@@ -81,7 +81,7 @@ public class PairMatchProgram {
             if (!randomMissionPrograms.isMatched(course, level, missionName)) {
                 return randomMissionPrograms.matchPair(course, level, missionName);
             }
-            MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
+            MatchCommand matchCommand = inputMatchCommand();
             if (matchCommand == YES) {
                 return randomMissionPrograms.matchPair(course, level, missionName);
             }
@@ -89,6 +89,15 @@ public class PairMatchProgram {
         } catch (IllegalArgumentException | IllegalStateException e) {
             ErrorView.printError(e);
             return runMatchCommand();
+        }
+    }
+
+    private MatchCommand inputMatchCommand() {
+        try {
+            return MatchCommand.from(InputView.inputMatchCommand());
+        } catch (IllegalArgumentException e) {
+            ErrorView.printError(e);
+            return inputMatchCommand();
         }
     }
 
