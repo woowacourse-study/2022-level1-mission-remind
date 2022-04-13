@@ -1,6 +1,6 @@
 package pairmatching;
 
-import static pairmatching.command.MatchCommand.YES;
+import static pairmatching.command.MatchCommand.NO;
 import static pairmatching.domain.Level.LEVEL1;
 import static pairmatching.domain.Level.LEVEL2;
 import static pairmatching.domain.Level.LEVEL4;
@@ -78,14 +78,10 @@ public class PairMatchProgram {
             Course course = Course.from(missionValues.get(0));
             Level level = Level.from(missionValues.get(1));
             String missionName = missionValues.get(2);
-            if (!randomMissionPrograms.isMatched(course, level, missionName)) {
-                return randomMissionPrograms.matchPair(course, level, missionName);
+            if (randomMissionPrograms.isMatched(course, level, missionName) && inputMatchCommand() == NO) {
+                return runMatchCommand();
             }
-            MatchCommand matchCommand = inputMatchCommand();
-            if (matchCommand == YES) {
-                return randomMissionPrograms.matchPair(course, level, missionName);
-            }
-            return runMatchCommand();
+            return randomMissionPrograms.matchPair(course, level, missionName);
         } catch (IllegalArgumentException | IllegalStateException e) {
             ErrorView.printError(e);
             return runMatchCommand();
