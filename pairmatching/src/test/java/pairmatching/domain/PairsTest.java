@@ -63,16 +63,6 @@ class PairsTest {
         assertThat(pairs.containAlreadyPair(comparePairs)).isFalse();
     }
 
-
-    @Test
-    void 매칭된_페어가_없는데_초기화하는_경우_예외발생() {
-        final Pairs pairs = new Pairs(new ArrayList<>());
-
-        assertThatThrownBy(() -> pairs.resetPair())
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessage("[ERROR] 매칭된 이력이 없어 초기화 불가");
-    }
-
     @Test
     void 매칭된_페어_초기화() {
         final Pairs pairs = new Pairs(List.of(new Pair(BACKEND, "name1", "name2"),
