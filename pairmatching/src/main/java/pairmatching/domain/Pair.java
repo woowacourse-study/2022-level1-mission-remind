@@ -40,10 +40,6 @@ public class Pair {
         this(new Crew(firstName, course), new Crew(secondName, course), new Crew(thirdName, course));
     }
 
-    private boolean isSameSize(final Pair pair) {
-        return this.crews.size() == pair.crews.size();
-    }
-
     public List<String> pairNames() {
         return crews.stream()
                 .map(Crew::name)
