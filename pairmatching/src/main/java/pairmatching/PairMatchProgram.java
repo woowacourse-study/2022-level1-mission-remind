@@ -13,17 +13,17 @@ import pairmatching.command.ProgramCommand;
 import pairmatching.domain.Course;
 import pairmatching.domain.Level;
 import pairmatching.domain.Pair;
-import pairmatching.domain.RandomMissionPrograms;
+import pairmatching.domain.RandomMissionProgram;
 import pairmatching.view.ErrorView;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
 public class PairMatchProgram {
 
-    private final RandomMissionPrograms randomMissionPrograms;
+    private final RandomMissionProgram randomMissionProgram;
 
-    private PairMatchProgram(final RandomMissionPrograms randomMissionPrograms) {
-        this.randomMissionPrograms = randomMissionPrograms;
+    private PairMatchProgram(final RandomMissionProgram randomMissionProgram) {
+        this.randomMissionProgram = randomMissionProgram;
     }
 
     public static PairMatchProgram createProgram() {
@@ -40,8 +40,8 @@ public class PairMatchProgram {
         crewNames.put(Course.BACKEND, InputView.inputBackendCrews());
         crewNames.put(Course.FRONTEND, InputView.inputFrontendCrews());
 
-        final RandomMissionPrograms randomMissionPrograms = new RandomMissionPrograms(missions, crewNames);
-        return new PairMatchProgram(randomMissionPrograms);
+        final RandomMissionProgram randomMissionProgram = new RandomMissionProgram(missions, crewNames);
+        return new PairMatchProgram(randomMissionProgram);
     }
 
     public void run() {
@@ -50,7 +50,7 @@ public class PairMatchProgram {
             return;
         }
         if (command == ProgramCommand.RESET) {
-            randomMissionPrograms.resetAllPair();
+            randomMissionProgram.resetAllPair();
         }
         if (command == ProgramCommand.MATCH) {
             List<Pair> pairs = runMatchCommand();
@@ -78,10 +78,10 @@ public class PairMatchProgram {
             Course course = Course.from(missionValues.get(0));
             Level level = Level.from(missionValues.get(1));
             String missionName = missionValues.get(2);
-            if (randomMissionPrograms.isMatched(course, level, missionName) && inputMatchCommand() == NO) {
+            if (randomMissionProgram.isMatched(course, level, missionName) && inputMatchCommand() == NO) {
                 return runMatchCommand();
             }
-            return randomMissionPrograms.matchPair(course, level, missionName);
+            return randomMissionProgram.matchPair(course, level, missionName);
         } catch (IllegalArgumentException | IllegalStateException e) {
             ErrorView.printError(e);
             return runMatchCommand();
@@ -103,7 +103,7 @@ public class PairMatchProgram {
             Course course = Course.from(missionValues.get(0));
             Level level = Level.from(missionValues.get(1));
             String missionName = missionValues.get(2);
-            return randomMissionPrograms.currentMatchedPairs(course, level, missionName);
+            return randomMissionProgram.currentMatchedPairs(course, level, missionName);
         } catch (IllegalArgumentException | IllegalStateException e) {
             ErrorView.printError(e);
             return runSearchCommand();

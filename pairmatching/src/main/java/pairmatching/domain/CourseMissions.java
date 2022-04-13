@@ -8,19 +8,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import pairmatching.strategy.CrewShuffleStrategy;
 
-public class MissionProgram {
+public class CourseMissions {
 
     private final Crews crews;
     private final List<Mission> missions;
 
-    public MissionProgram(final Crews crews, final List<Mission> missions) {
+    public CourseMissions(final Crews crews, final List<Mission> missions) {
         Objects.requireNonNull(crews, "[ERROR] crews null불가");
         Objects.requireNonNull(missions, "[ERROR] missions null불가");
         this.crews = crews;
         this.missions = new ArrayList<>(missions);
     }
 
-    public MissionProgram(final List<Crew> crews, final CrewShuffleStrategy strategy,
+    public CourseMissions(final List<Crew> crews, final CrewShuffleStrategy strategy,
                           final Map<String, Level> missionMap) {
         this(new Crews(crews, strategy), convertMissions(missionMap));
     }
