@@ -50,7 +50,7 @@ public class Pairs {
 
     private boolean containPair(final Pair pair) {
         return pairs.stream()
-                .anyMatch(pair::isSamePair);
+                .anyMatch(pair::equals);
     }
 
     public boolean isMatched() {

@@ -40,10 +40,6 @@ public class Pair {
         this(new Crew(firstName, course), new Crew(secondName, course), new Crew(thirdName, course));
     }
 
-    public boolean isSamePair(final Pair pair) {
-        return isSameSize(pair) && this.crews.equals(pair.crews);
-    }
-
     private boolean isSameSize(final Pair pair) {
         return this.crews.size() == pair.crews.size();
     }
