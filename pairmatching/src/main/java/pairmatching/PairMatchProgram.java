@@ -14,6 +14,7 @@ import pairmatching.domain.Course;
 import pairmatching.domain.Level;
 import pairmatching.domain.Pair;
 import pairmatching.domain.RandomMissionPrograms;
+import pairmatching.view.ErrorView;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -44,7 +45,7 @@ public class PairMatchProgram {
     }
 
     public void run() {
-        ProgramCommand command = ProgramCommand.from(InputView.inputCommand());
+        ProgramCommand command = inputProgramCommand();
         if (command == ProgramCommand.END) {
             return;
         }
@@ -52,40 +53,59 @@ public class PairMatchProgram {
             randomMissionPrograms.resetAllPair();
         }
         if (command == ProgramCommand.MATCH) {
-            runMatchCommand();
+            List<Pair> pairs = runMatchCommand();
+            OutputView.printCurrentMatchedPairs(pairs);
         }
         if (command == ProgramCommand.SEARCH) {
-            programRunner(randomMissionPrograms::currentMatchedPairs);
+            List<Pair> pairs = runSearchCommand();
+            OutputView.printCurrentMatchedPairs(pairs);
         }
         run();
     }
 
-    private void runMatchCommand() {
-        List<String> missionValues = InputView.inputMission();
-        Course course = Course.from(missionValues.get(0));
-        Level level = Level.from(missionValues.get(1));
-        String missionName = missionValues.get(2);
-        if (!randomMissionPrograms.isMatched(course, level, missionName)) {
-            List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
-            OutputView.printCurrentMatchedPairs(pairs);
-        }
-        else {
-            MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
-            if (matchCommand == YES) {
-                List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
-                OutputView.printCurrentMatchedPairs(pairs);
-            }
-            else {
-                runMatchCommand();
-            }
+    private ProgramCommand inputProgramCommand() {
+        try {
+            return ProgramCommand.from(InputView.inputCommand());
+        } catch (IllegalArgumentException e) {
+            ErrorView.printError(e);
+            return inputProgramCommand();
         }
     }
 
-    private void programRunner(PairMatchProgramRunner runner) {
-        List<String> missionValues = InputView.inputMission();
-        Course course = Course.from(missionValues.get(0));
-        Level level = Level.from(missionValues.get(1));
-        String missionName = missionValues.get(2);
-        OutputView.printCurrentMatchedPairs(runner.apply(course, level, missionName));
+    private List<Pair> runMatchCommand() {
+        try {
+            List<String> missionValues = InputView.inputMission();
+            Course course = Course.from(missionValues.get(0));
+            Level level = Level.from(missionValues.get(1));
+            String missionName = missionValues.get(2);
+            if (!randomMissionPrograms.isMatched(course, level, missionName)) {
+                return randomMissionPrograms.matchPair(course, level, missionName);
+            }
+            else {
+                MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
+                if (matchCommand == YES) {
+                    return randomMissionPrograms.matchPair(course, level, missionName);
+                }
+                else {
+                    return runMatchCommand();
+                }
+            }
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            ErrorView.printError(e);
+            return runMatchCommand();
+        }
+    }
+
+    private List<Pair> runSearchCommand() {
+        try {
+            List<String> missionValues = InputView.inputMission();
+            Course course = Course.from(missionValues.get(0));
+            Level level = Level.from(missionValues.get(1));
+            String missionName = missionValues.get(2);
+            return randomMissionPrograms.currentMatchedPairs(course, level, missionName);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            ErrorView.printError(e);
+            return runSearchCommand();
+        }
     }
 }

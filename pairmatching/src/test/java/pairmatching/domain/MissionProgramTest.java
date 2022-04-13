@@ -78,7 +78,7 @@ class MissionProgramTest {
                 new Mission("mission2", LEVEL1, new Pairs(new ArrayList<>())));
         final MissionProgram missionProgram = new MissionProgram(crews, missions);
 
-        final List<Pair> expected = List.of(new Pair(crew1, crew3), new Pair(crew2, crew4));
+        final List<Pair> expected = List.of(new Pair(crew1, crew3), new Pair(crew4, crew2));
 
         assertThat(missionProgram.matchPair("mission2", LEVEL1)).isEqualTo(expected);
     }
