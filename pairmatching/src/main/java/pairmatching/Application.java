@@ -38,7 +38,8 @@ public class Application {
             Course course = Course.from(missionValues.get(0));
             Level level = Level.from(missionValues.get(1));
             String missionName = missionValues.get(2);
-
+            List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
+            OutputView.printCurrentMatchedPairs(pairs);
         }
         if (command == ProgramCommand.SEARCH) {
             List<String> missionValues = InputView.inputMission();
