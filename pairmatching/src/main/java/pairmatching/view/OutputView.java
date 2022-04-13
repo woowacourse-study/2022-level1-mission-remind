@@ -10,6 +10,7 @@ public class OutputView {
     }
 
     public static void printCurrentMatchedPairs(final List<Pair> pairs) {
+        System.out.println("페어 매칭 결과입니다.");
         for (Pair pair : pairs) {
             printPairNames(pair);
         }
@@ -20,6 +21,6 @@ public class OutputView {
     }
 
     private static String convertPairName(final Pair pair) {
-        return String.join(" | ", pair.pairNames());
+        return String.join(" : ", pair.pairNames());
     }
 }
