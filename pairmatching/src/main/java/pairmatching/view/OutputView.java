@@ -1,0 +1,25 @@
+package pairmatching.view;
+
+import java.util.List;
+import pairmatching.domain.Pair;
+
+public class OutputView {
+
+    private OutputView() {
+        throw new AssertionError();
+    }
+
+    public static void printCurrentMatchedPairs(final List<Pair> pairs) {
+        for (Pair pair : pairs) {
+            printPairNames(pair);
+        }
+    }
+
+    private static void printPairNames(final Pair pair) {
+        System.out.println(convertPairName(pair));
+    }
+
+    private static String convertPairName(final Pair pair) {
+        return String.join(" | ", pair.pairNames());
+    }
+}

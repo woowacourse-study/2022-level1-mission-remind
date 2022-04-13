@@ -1,8 +1,10 @@
 package pairmatching.domain;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Pair {
 
@@ -48,6 +50,12 @@ public class Pair {
 
     private boolean isSameSize(final Pair pair) {
         return this.crews.size() == pair.crews.size();
+    }
+
+    public List<String> pairNames() {
+        return crews.stream()
+                .map(Crew::name)
+                .collect(Collectors.toList());
     }
 
     @Override

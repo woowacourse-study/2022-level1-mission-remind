@@ -10,8 +10,10 @@ import java.util.Map;
 import pairmatching.command.ProgramCommand;
 import pairmatching.domain.Course;
 import pairmatching.domain.Level;
+import pairmatching.domain.Pair;
 import pairmatching.domain.RandomMissionPrograms;
 import pairmatching.view.InputView;
+import pairmatching.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
@@ -33,10 +35,18 @@ public class Application {
         ProgramCommand command = ProgramCommand.from(InputView.inputCommand());
         if (command == ProgramCommand.MATCH) {
             List<String> missionValues = InputView.inputMission();
+            Course course = Course.from(missionValues.get(0));
+            Level level = Level.from(missionValues.get(1));
+            String missionName = missionValues.get(2);
 
         }
         if (command == ProgramCommand.SEARCH) {
             List<String> missionValues = InputView.inputMission();
+            Course course = Course.from(missionValues.get(0));
+            Level level = Level.from(missionValues.get(1));
+            String missionName = missionValues.get(2);
+            List<Pair> pairs = randomMissionPrograms.currentMatchedPairs(course, level, missionName);
+            OutputView.printCurrentMatchedPairs(pairs);
         }
         if (command == ProgramCommand.RESET) {
             randomMissionPrograms.resetAllPair();
