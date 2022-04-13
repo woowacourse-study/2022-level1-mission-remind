@@ -36,6 +36,11 @@ public class RandomMissionPrograms {
                 .collect(Collectors.toList());
     }
 
+    public boolean isMatched(final Course course, final Level level, final String missionName) {
+        final MissionProgram missionProgram = findMissionProgramByCourse(course);
+        return missionProgram.isMatched(missionName, level);
+    }
+
     public List<Pair> matchPair(final Course course, final Level level, final String missionName) {
         final MissionProgram missionProgram = findMissionProgramByCourse(course);
         return missionProgram.matchPair(missionName, level);

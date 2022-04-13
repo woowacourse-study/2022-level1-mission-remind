@@ -19,6 +19,9 @@ public class InputView {
     private static final String INPUT_MISSION_ERROR_MESSAGE = "미션을 다시 입력해주세요.";
     private static final int INPUT_MISSION_SIZE = 3;
 
+    private static final String INPUT_MATCH_COMMAND_MESSAGE = String.format("%s%n%s%n",
+            "매칭 정보가 있습니다. 다시 매칭하시겠습니까?", "네 | 아니오");
+
     private static final String BACKEND_CREW_FILE_NAME = "src/main/resources/backend-crew.md";
     private static final String FRONTEND_CREW_FILE_NAME = "src/main/resources/frontend-crew.md";
 
@@ -41,6 +44,11 @@ public class InputView {
             return inputMission();
         }
         return mission;
+    }
+
+    public static String inputMatchCommand() {
+        System.out.print(INPUT_MATCH_COMMAND_MESSAGE);
+        return consoleRead();
     }
 
     private static String consoleRead() {

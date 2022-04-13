@@ -35,6 +35,10 @@ public class Mission {
         return this.name.equals(name) && this.level == level;
     }
 
+    public boolean isMatched() {
+        return pairs.isMatched();
+    }
+
     public List<Pair> matchPair(final Pairs pairs) {
         return this.pairs.replaceAllPairs(pairs);
     }

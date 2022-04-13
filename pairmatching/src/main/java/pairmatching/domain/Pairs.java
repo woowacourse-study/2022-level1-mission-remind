@@ -53,6 +53,10 @@ public class Pairs {
                 .anyMatch(pair::isSamePair);
     }
 
+    public boolean isMatched() {
+        return !pairs.isEmpty();
+    }
+
     public List<Pair> replaceAllPairs(Pairs pairs) {
         this.pairs.clear();
         this.pairs.addAll(pairs.pairs);

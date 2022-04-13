@@ -32,6 +32,11 @@ public class MissionProgram {
                 .collect(Collectors.toList());
     }
 
+    public boolean isMatched(final String missionName, final Level level) {
+        final Mission mission = findMission(missionName, level);
+        return mission.isMatched();
+    }
+
     public List<Pair> matchPair(final String missionName, final Level level) {
         final Mission mission = findMission(missionName, level);
         Pairs pairs = IntStream.range(0, 3)

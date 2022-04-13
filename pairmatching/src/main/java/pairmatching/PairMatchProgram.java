@@ -1,5 +1,6 @@
 package pairmatching;
 
+import static pairmatching.command.MatchCommand.YES;
 import static pairmatching.domain.Level.LEVEL1;
 import static pairmatching.domain.Level.LEVEL2;
 import static pairmatching.domain.Level.LEVEL4;
@@ -7,9 +8,11 @@ import static pairmatching.domain.Level.LEVEL4;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import pairmatching.command.MatchCommand;
 import pairmatching.command.ProgramCommand;
 import pairmatching.domain.Course;
 import pairmatching.domain.Level;
+import pairmatching.domain.Pair;
 import pairmatching.domain.RandomMissionPrograms;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -49,12 +52,33 @@ public class PairMatchProgram {
             randomMissionPrograms.resetAllPair();
         }
         if (command == ProgramCommand.MATCH) {
-            programRunner(randomMissionPrograms::matchPair);
+            runMatchCommand();
         }
         if (command == ProgramCommand.SEARCH) {
             programRunner(randomMissionPrograms::currentMatchedPairs);
         }
         run();
+    }
+
+    private void runMatchCommand() {
+        List<String> missionValues = InputView.inputMission();
+        Course course = Course.from(missionValues.get(0));
+        Level level = Level.from(missionValues.get(1));
+        String missionName = missionValues.get(2);
+        if (!randomMissionPrograms.isMatched(course, level, missionName)) {
+            List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
+            OutputView.printCurrentMatchedPairs(pairs);
+        }
+        else {
+            MatchCommand matchCommand = MatchCommand.from(InputView.inputMatchCommand());
+            if (matchCommand == YES) {
+                List<Pair> pairs = randomMissionPrograms.matchPair(course, level, missionName);
+                OutputView.printCurrentMatchedPairs(pairs);
+            }
+            else {
+                runMatchCommand();
+            }
+        }
     }
 
     private void programRunner(PairMatchProgramRunner runner) {
