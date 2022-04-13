@@ -48,9 +48,10 @@ public class RandomMissionPrograms {
                 .orElseThrow(() -> new IllegalStateException("[ERROR] 존재하지 않는 과정"));
     }
 
-    public void resetPair(final Course course, final Level level, final String missionName) {
-        final MissionProgram missionProgram = findMissionProgramByCourse(course);
-        missionProgram.resetPair(missionName, level);
+    public void resetAllPair() {
+        for (MissionProgram missionProgram : missionPrograms) {
+            missionProgram.resetAllPair();
+        }
     }
 
     public List<Pair> currentMatchedPairs(final Course course, final Level level, final String missionName) {

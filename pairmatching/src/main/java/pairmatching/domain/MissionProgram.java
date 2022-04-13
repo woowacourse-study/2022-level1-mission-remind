@@ -61,9 +61,10 @@ public class MissionProgram {
         return crews.course() == course;
     }
 
-    public void resetPair(final String missionName, final Level level) {
-        final Mission mission = findMission(missionName, level);
-        mission.resetPair();
+    public void resetAllPair() {
+        for (Mission mission : missions) {
+            mission.resetPair();
+        }
     }
 
     public List<Pair> currentMatchedPairs(final String missionName, final Level level) {
