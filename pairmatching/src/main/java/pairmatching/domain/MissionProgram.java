@@ -10,10 +10,10 @@ import pairmatching.strategy.CrewShuffleStrategy;
 
 public class MissionProgram {
 
-    private final CourseCrews crews;
+    private final Crews crews;
     private final List<Mission> missions;
 
-    public MissionProgram(final CourseCrews crews, final List<Mission> missions) {
+    public MissionProgram(final Crews crews, final List<Mission> missions) {
         Objects.requireNonNull(crews, "[ERROR] crews null불가");
         Objects.requireNonNull(missions, "[ERROR] missions null불가");
         this.crews = crews;
@@ -22,7 +22,7 @@ public class MissionProgram {
 
     public MissionProgram(final List<Crew> crews, final CrewShuffleStrategy strategy,
                           final Map<String, Level> missionMap) {
-        this(new CourseCrews(crews, strategy), convertMissions(missionMap));
+        this(new Crews(crews, strategy), convertMissions(missionMap));
     }
 
     private static List<Mission> convertMissions(final Map<String, Level> missions) {

@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Objects;
 import pairmatching.strategy.CrewShuffleStrategy;
 
-public class CourseCrews {
+public class Crews {
 
     private final List<Crew> crews;
     private final CrewShuffleStrategy crewShuffleStrategy;
 
-    public CourseCrews(final List<Crew> crews, final CrewShuffleStrategy crewShuffleStrategy) {
+    public Crews(final List<Crew> crews, final CrewShuffleStrategy crewShuffleStrategy) {
         Objects.requireNonNull(crews, "[ERROR] crews null불가");
         Objects.requireNonNull(crewShuffleStrategy, "[ERROR] 크루 셔플 전략 null불가");
         this.crews = new ArrayList<>(crews);

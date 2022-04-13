@@ -21,7 +21,7 @@ class MissionProgramTest {
 
     @ParameterizedTest
     @NullSource
-    void 크루들_정보가_null인_경우_예외발생(final CourseCrews crews) {
+    void 크루들_정보가_null인_경우_예외발생(final Crews crews) {
         assertThatThrownBy(() -> new MissionProgram(crews, new ArrayList<>()))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessage("[ERROR] crews null불가");
@@ -30,7 +30,7 @@ class MissionProgramTest {
     @ParameterizedTest
     @NullSource
     void 미션_리스트가_null인_경우_예외발생(final List<Mission> missions) {
-        CourseCrews crews = new CourseCrews(List.of(new Crew("crew1", BACKEND),
+        Crews crews = new Crews(List.of(new Crew("crew1", BACKEND),
                 new Crew("crew2", BACKEND)), new CrewRandomsShuffleStrategy());
 
         assertThatThrownBy(() -> new MissionProgram(crews, missions))
@@ -40,7 +40,7 @@ class MissionProgramTest {
 
     @Test
     void 존재하지_않는_미션_매칭_예외발생() {
-        final CourseCrews crews = new CourseCrews(
+        final Crews crews = new Crews(
                 List.of(crew1, crew2, crew3, crew4),
                 crew -> List.of("crew1", "crew2", "crew3", "crew4"));
         final List<Mission> missions = List.of(
@@ -55,7 +55,7 @@ class MissionProgramTest {
 
     @Test
     void 매칭_시도횟수가_3회가_넘는_경우_예외발생() {
-        final CourseCrews crews = new CourseCrews(
+        final Crews crews = new Crews(
                 List.of(crew1, crew2, crew3, crew4),
                 crew -> List.of("crew1", "crew2", "crew3", "crew4"));
         final List<Mission> missions = List.of(
@@ -70,7 +70,7 @@ class MissionProgramTest {
 
     @Test
     void 새로운_페어매칭_성공() {
-        final CourseCrews crews = new CourseCrews(
+        final Crews crews = new Crews(
                 List.of(crew1, crew2, crew3, crew4),
                 crew -> List.of("crew1", "crew3", "crew4", "crew2"));
         final List<Mission> missions = List.of(
